@@ -1,0 +1,42 @@
+[
+	{
+		"page": 1,
+		"text": "Aqueous humour is secreted by the non-pigmented epithelium of the ciliary body, mostly by active transport, at roughly 2 to 3 microlitres per minute. Conventional outflow passes through the trabecular meshwork into Schlemm's canal. Uveoscleral outflow is the main target of prostaglandin analogues. Intraocular pressure reflects the balance between production and outflow. In adults the population average is about 15 to 16 mmHg, and 21 mmHg is often quoted as the upper limit of normal. Goldmann applanation tonometry at the slit lamp is the reference standard. Record the time of measurement, the method and which eye."
+	},
+	{
+		"page": 2,
+		"text": "Van Herick grading compares the peripheral anterior chamber depth with corneal thickness. Grade 1 is less than a quarter of corneal thickness and the angle is usually dangerously narrow. Van Herick is a screening test only and grades 1 and 2 should be confirmed with gonioscopy. Gonioscopy is the reference standard. Use a dark room and a short thin beam that avoids the pupil, because light can open an angle that would be closed in the dark. Indentation gonioscopy shows whether closure is appositional or whether there are peripheral anterior synechiae. Iridotrabecular contact for at least 180 degrees is the threshold used by the American Academy of Ophthalmology. The original international definition requires three or more quadrants."
+	},
+	{
+		"page": 3,
+		"text": "Primary angle closure suspect: iridotrabecular contact for at least 180 degrees, with normal IOP, no peripheral anterior synechiae and no glaucomatous optic neuropathy. Primary angle closure: iridotrabecular contact with raised IOP and/or peripheral anterior synechiae, but a healthy optic disc. Primary angle closure glaucoma: angle closure with glaucomatous optic neuropathy. Acute primary angle closure: a sudden symptomatic rise in IOP caused by angle closure. Risk factors include hypermetropia and short axial length, older age, female sex, East Asian or Inuit ethnicity, a family history, and a shallow anterior chamber. Pupil block is the most common mechanism and is relieved by a peripheral iridotomy."
+	},
+	{
+		"page": 4,
+		"text": "Acute primary angle closure causes sudden, severe, aching pain in one eye, often with a frontal headache on the same side. Blurred vision and coloured haloes around lights are caused by corneal oedema. Nausea and vomiting can lead to a mistaken abdominal or neurological diagnosis. Signs include reduced visual acuity, very high IOP usually 50 to 80 mmHg and almost always above 40 mmHg, ciliary injection, corneal epithelial oedema, a shallow peripheral anterior chamber, and a fixed mid-dilated pupil caused by ischaemia of the iris sphincter. A narrow angle in the other eye is an important diagnostic clue."
+	},
+	{
+		"page": 5,
+		"text": "Attacks are often triggered by dim light, such as a cinema, and by drugs with anticholinergic effects, including some antihistamines (for example chlorphenamine). Lie the patient flat and give analgesia and an antiemetic. Topical treatment includes a beta-blocker such as timolol 0.5% unless the patient has asthma, COPD, bradycardia or heart block, and an alpha-agonist such as apraclonidine 1% or brimonidine 0.2%. Pilocarpine 2% constricts the pupil, but the iris sphincter is often ischaemic and does not respond while the IOP is very high, so pilocarpine works better once the pressure has started to fall. The priority is prompt iridotomy in both eyes. Check for sulfonamide allergy before giving acetazolamide."
+	},
+	{
+		"page": 6,
+		"text": "Acetazolamide 500 mg is given intravenously if the IOP is above about 50 mmHg or the patient is vomiting. Do not use it when the patient has a sulfonamide allergy. If the IOP does not fall, review the diagnosis, consider early laser iridotomy after clearing the cornea, laser peripheral iridoplasty, or anterior chamber paracentesis as a temporary measure. Laser peripheral iridotomy in the affected eye is done once the cornea has cleared. Prophylactic laser peripheral iridotomy is done in the fellow eye, because without treatment around 40 to 50% of fellow eyes have an attack within 5 to 10 years. Once the eye has settled, repeat gonioscopy, including the affected eye, and examine both optic discs."
+	},
+	{
+		"page": 7,
+		"text": "An iridotomy is a small full-thickness opening in the peripheral iris that lets aqueous bypass the pupil and relieves pupil block. Indications include after acute primary angle closure, in both eyes. The ZAP and ANA-LIG trials showed only a small protective effect in primary angle closure suspects, so laser peripheral iridotomy is usually reserved for higher-risk people. Complications include a temporary rise in IOP, bleeding, anterior uveitis, and visual disturbance if the opening is only partly covered by the lid. Persistent angle closure despite a patent iridotomy suggests plateau iris or a lens mechanism."
+	},
+	{
+		"page": 8,
+		"text": "In plateau iris the ciliary processes are positioned anteriorly and hold the peripheral iris forward. Plateau iris syndrome describes an angle that stays closed, or closes again, despite a patent iridotomy. Gonioscopy shows a double hump sign on indentation. Laser iridoplasty is the procedure of choice when the angle stays closed after iridotomy. Topiramate and some other sulfonamide-type drugs cause ciliochoroidal effusion, typically in both eyes, with a sudden myopic shift. Stop the drug and avoid acetazolamide, which is itself a sulfonamide. Pilocarpine and iridotomy do not help, because there is no pupil block."
+	},
+	{
+		"page": 9,
+		"text": "Primary open-angle glaucoma is a chronic progressive optic neuropathy with an open angle and no secondary cause. Ocular hypertension means an IOP above 21 mmHg with a healthy optic disc and visual field. Prostaglandin analogues increase uveoscleral outflow. Beta-blockers reduce aqueous production and are avoided in asthma, COPD, heart block and bradycardia. Systemic acetazolamide can cause tingling, tiredness and low potassium, and is avoided in sulfonamide allergy, kidney disease and sickle cell disease. Pilocarpine contracts the ciliary muscle and constricts the pupil. Avoid pilocarpine in uveitis and aqueous misdirection."
+	},
+	{
+		"page": 10,
+		"text": "Selective laser trabeculoplasty treats the trabecular meshwork in open-angle glaucoma and ocular hypertension. Laser peripheral iridotomy relieves pupil block in angle closure. Laser iridoplasty contracts the peripheral iris, mainly for plateau iris or an attack that does not respond to medicine. Trabeculectomy creates a guarded channel to a bleb. In angle-closure eyes the risk of aqueous misdirection is higher. Lens extraction deepens the anterior chamber and is an effective treatment for many people with angle closure."
+	}
+]
