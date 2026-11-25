@@ -1,5 +1,6 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
+import noteChunks from "../../data/note_chunks.json";
 
 type NoteChunk = { page: number; text: string };
 
@@ -18,8 +19,7 @@ export const revisionPoint = createServerFn({ method: "POST" })
 			? snap.data()?.answers.filter((item: unknown) => typeof item === "string")
 			: [];
 		const answer = answers.join(" ");
-		const chunks = await loadChunks();
-		const selected = selectChunks(answer, chunks);
+		const selected = selectChunks(answer, noteChunks as NoteChunk[]);
 		if (selected.length === 0) {
 			return {
 				point:
@@ -50,15 +50,6 @@ export const revisionPoint = createServerFn({ method: "POST" })
 		await ref.set({ revision }, { merge: true });
 		return revision;
 	});
-
-async function loadChunks() {
-	const { readFileSync } = await import("node:fs");
-	const raw = readFileSync(
-		new URL("../../data/note_chunks.json", import.meta.url),
-		"utf8",
-	);
-	return JSON.parse(raw) as NoteChunk[];
-}
 
 function selectChunks(answer: string, chunks: NoteChunk[]) {
 	const words = new Set(answer.toLowerCase().match(/[a-z]{4,}/g) ?? []);

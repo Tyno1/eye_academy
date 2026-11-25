@@ -1,4 +1,4 @@
-import { readFileSync } from "node:fs";
+import rawCase from "./case.json";
 
 export type CaseEye = "right" | "left" | "both" | null;
 
@@ -55,9 +55,7 @@ export type FindingLookup =
 	| FindingMatch
 	| { kind: "clarify" | "missing"; spoken: string };
 
-const caseFile = JSON.parse(
-	readFileSync(new URL("./case.json", import.meta.url), "utf8"),
-) as OfficialCase;
+const caseFile = rawCase as OfficialCase;
 
 const eyeWords: Record<Exclude<CaseEye, null>, string[]> = {
 	right: ["right", "od"],
