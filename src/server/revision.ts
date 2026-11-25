@@ -4,6 +4,22 @@ import noteChunks from "../../data/note_chunks.json";
 
 type NoteChunk = { page: number; text: string };
 
+const STOP = new Set(
+	"that this with would will have from they their them then than there were been being what when which while because could should about into also very just like some give them after before eyes".split(
+		" ",
+	),
+);
+
+export function squash(text: string) {
+	return text
+		.replace(/[\u2018\u2019]/g, "'")
+		.replace(/[\u201c\u201d]/g, '"')
+		.replace(/[\u2013\u2014]/g, "-")
+		.replace(/\s+/g, " ")
+		.trim()
+		.toLowerCase();
+}
+
 export const revisionPoint = createServerFn({ method: "POST" })
 	.validator(z.object({ attemptId: z.uuid() }))
 	.handler(async ({ data }) => {
@@ -26,20 +42,27 @@ export const revisionPoint = createServerFn({ method: "POST" })
 					"The reference note does not support a revision point for that answer.",
 				page: null,
 				excerpt: null,
+				retrievedPages: [],
 			};
 		}
 
+		const retrievedPages = selected.map((chunk) => chunk.page);
 		const apiKey = process.env.OPENAI_API_KEY;
 		if (!apiKey)
 			throw new Error("Set OPENAI_API_KEY to write the revision point.");
 		const drafted = await draftPoint(apiKey, answer, selected);
 		const page = selected.find((chunk) => chunk.page === drafted.page);
-		if (!page || !page.text.includes(drafted.excerpt)) {
+		if (
+			!page ||
+			drafted.excerpt.trim().length < 20 ||
+			!squash(page.text).includes(squash(drafted.excerpt))
+		) {
 			return {
 				point:
 					"The reference note does not support a revision point for that answer.",
 				page: null,
 				excerpt: null,
+				retrievedPages,
 			};
 		}
 		const revision = {
@@ -47,19 +70,29 @@ export const revisionPoint = createServerFn({ method: "POST" })
 			page: drafted.page,
 			excerpt: drafted.excerpt,
 		};
-		await ref.set({ revision }, { merge: true });
-		return revision;
+		await ref.set({ revision, retrievedPages }, { merge: true });
+		return { ...revision, retrievedPages };
 	});
 
-function selectChunks(answer: string, chunks: NoteChunk[]) {
-	const words = new Set(answer.toLowerCase().match(/[a-z]{4,}/g) ?? []);
+export function selectChunks(answer: string, chunks: NoteChunk[]) {
+	const words = new Set(
+		(answer.toLowerCase().match(/[a-z]{4,}/g) ?? []).filter(
+			(word) => !STOP.has(word),
+		),
+	);
+	const bags = chunks.map(
+		(chunk) => new Set(chunk.text.toLowerCase().split(/[^a-z]+/)),
+	);
+	const idf = (word: string) => {
+		const df = bags.filter((bag) => bag.has(word)).length;
+		return df === 0 ? 0 : Math.log(1 + chunks.length / df);
+	};
 	return chunks
-		.map((chunk) => ({
+		.map((chunk, index) => ({
 			chunk,
-			score: chunk.text
-				.toLowerCase()
-				.split(/[^a-z]+/)
-				.filter((word) => words.has(word)).length,
+			score: [...words]
+				.filter((word) => bags[index].has(word))
+				.reduce((sum, word) => sum + idf(word), 0),
 		}))
 		.filter((item) => item.score > 0)
 		.sort((a, b) => b.score - a.score)

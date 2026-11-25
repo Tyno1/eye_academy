@@ -248,10 +248,27 @@ export async function connectViva({ attemptId, onLine, onState }: ConnectArgs) {
 			);
 		};
 
+		let turnStartedAt = 0;
+		const turnTimings: number[] = [];
 		const events = peer.createDataChannel("oai-events");
 		channel = events;
 		events.addEventListener("message", (event) => {
 			const payload = JSON.parse(event.data) as { type?: string };
+			// Voice-turn timer: starts when the server reports the trainee stopped
+			// speaking (this already includes the 1200 ms VAD silence window), stops
+			// when the examiner's audio starts playing back over WebRTC.
+			if (payload.type === "input_audio_buffer.speech_stopped") {
+				turnStartedAt = performance.now();
+			}
+			if (payload.type === "output_audio_buffer.started" && turnStartedAt) {
+				const ms = Math.round(performance.now() - turnStartedAt);
+				turnTimings.push(ms);
+				console.info(
+					`[viva-timing] speech_stopped -> examiner audio: ${ms} ms`,
+					turnTimings,
+				);
+				turnStartedAt = 0;
+			}
 			if (payload.type === "input_audio_buffer.speech_stopped") askExaminer();
 			void handleEvent(
 				JSON.parse(event.data),

@@ -1,11 +1,11 @@
 import { describe, expect, it } from "vitest";
 import {
 	asksForWholeEye,
+	type CaseFinding,
 	examinerBrief,
 	followUpFor,
 	lookupFinding,
 	speakFinding,
-	type CaseFinding,
 } from "#/case/findings";
 
 describe("examinerBrief", () => {

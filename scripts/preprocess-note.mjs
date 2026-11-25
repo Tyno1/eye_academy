@@ -20,7 +20,7 @@ const chunks = [];
 for (let page = 1; page <= pageCount; page += 1) {
 	const text = execFileSync(
 		"pdftotext",
-		["-f", String(page), "-l", String(page), "-layout", pdf, "-"],
+		["-f", String(page), "-l", String(page), pdf, "-"],
 		{ encoding: "utf8" },
 	);
 	chunks.push({
@@ -28,7 +28,7 @@ for (let page = 1; page <= pageCount; page += 1) {
 		text: text
 			.replace(/eyeacademy\s+Take-home reference note/g, "")
 			.replace(/Glaucoma and angle closure · Eye Academy reference note\s+\d+/g, "")
-			.replace(/\s+\n/g, "\n")
+			.replace(/[ \t]+/g, " ").replace(/\s+\n/g, "\n")
 			.replace(/\n{3,}/g, "\n\n")
 			.trim(),
 	});

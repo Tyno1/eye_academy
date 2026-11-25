@@ -42,7 +42,7 @@ describe("revision", () => {
 
 	it("returns a refusal when no note pages match", async () => {
 		attemptDoc.get.mockResolvedValue({
-			data: () => ({ answers: ["zzzz not in note"] }),
+			data: () => ({ answers: ["zzzz qqqq xxxx"] }),
 		});
 		const { revisionPoint } = await import("#/server/revision");
 		await expect(revisionPoint({ data: { attemptId } })).resolves.toEqual({
@@ -50,6 +50,7 @@ describe("revision", () => {
 				"The reference note does not support a revision point for that answer.",
 			page: null,
 			excerpt: null,
+			retrievedPages: [],
 		});
 	});
 
@@ -83,8 +84,10 @@ describe("revision", () => {
 		expect(result.page).toBe(3);
 		expect(result.point).toBe("Treat the fellow eye as well.");
 		expect(result.excerpt).toContain("Primary angle closure suspect");
+		const { retrievedPages, ...revision } = result;
+		expect(retrievedPages).toContain(3);
 		expect(attemptDoc.set).toHaveBeenCalledWith(
-			{ revision: result },
+			{ revision, retrievedPages },
 			{ merge: true },
 		);
 	});
@@ -113,12 +116,51 @@ describe("revision", () => {
 		});
 
 		const { revisionPoint } = await import("#/server/revision");
-		await expect(revisionPoint({ data: { attemptId } })).resolves.toEqual({
-			point:
-				"The reference note does not support a revision point for that answer.",
-			page: null,
-			excerpt: null,
-		});
+		await expect(revisionPoint({ data: { attemptId } })).resolves.toMatchObject(
+			{
+				point:
+					"The reference note does not support a revision point for that answer.",
+				page: null,
+				excerpt: null,
+			},
+		);
 		expect(attemptDoc.set).not.toHaveBeenCalled();
+	});
+
+	it("accepts an excerpt that wraps across lines in the PDF text", async () => {
+		attemptDoc.get.mockResolvedValue({
+			data: () => ({ answers: ["laser iridotomy fellow eye prophylactic"] }),
+		});
+		attemptDoc.set.mockResolvedValue(undefined);
+		fetchMock.mockResolvedValue({
+			ok: true,
+			json: async () => ({
+				choices: [
+					{
+						message: {
+							content: JSON.stringify({
+								point: "Treat the fellow eye with a prophylactic iridotomy.",
+								page: 6,
+								excerpt:
+									"without treatment around 40 to 50% of fellow eyes have an attack within 5 to 10 years",
+							}),
+						},
+					},
+				],
+			}),
+		});
+		const { revisionPoint } = await import("#/server/revision");
+		const result = await revisionPoint({ data: { attemptId } });
+		expect(result.page).toBe(6);
+		expect(result.retrievedPages).toContain(6);
+	});
+
+	it("files the cinema and chlorphenamine trigger under page 4", async () => {
+		const chunks = (await import("../../../data/note_chunks.json"))
+			.default as Array<{ page: number; text: string }>;
+		const hits = chunks
+			.filter((chunk) => chunk.text.includes("chlorphenamine"))
+			.map((chunk) => chunk.page);
+		expect(hits).toEqual([4]);
 	});
 });
