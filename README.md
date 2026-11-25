@@ -8,7 +8,7 @@ A local voice viva for the fictional case EA-VIVA-001. Sign in, open an attempt,
 npm install
 ```
 
-Copy `.env.example` to `.env` and set `FIREBASE_CLIENT_EMAIL`, `FIREBASE_PRIVATE_KEY`, and `OPENAI_API_KEY`.
+Copy `.env.example` to `.env` and set `FIREBASE_PROJECT_ID`, `FIREBASE_CLIENT_EMAIL`, `FIREBASE_PRIVATE_KEY`, and `OPENAI_API_KEY`.
 
 ```bash
 npm run dev

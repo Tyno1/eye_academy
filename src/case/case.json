@@ -243,23 +243,10 @@
   ],
   "examiner_notes": {
     "diagnosis": "Right acute primary angle closure, with a narrow left angle at risk. Likely triggered by dim light and a new anticholinergic antihistamine.",
-    "key_points": [
-      "Lower the pressure: topical agents (e.g. beta-blocker, alpha-agonist, pilocarpine once the pressure starts to fall), plus systemic treatment as appropriate",
-      "Note the sulfonamide allergy before giving acetazolamide",
-      "Stop the chlorphenamine",
-      "Analgesia and antiemetic",
-      "Laser peripheral iridotomy to both eyes once the cornea clears, including the fellow eye",
-      "Review gonioscopy of the right eye and the optic discs after the attack settles"
-    ],
     "follow_up_ideas": [
       "Why treat the left eye as well?",
       "Why might pilocarpine not work at first when the pressure is very high?",
       "What would you do if the pressure doesn't come down?"
     ]
-  },
-  "reference_source": {
-    "title": "Glaucoma and angle closure: Eye Academy reference note",
-    "file": "Eye Academy - Glaucoma_and_Angle_Closure_Reference_Note.pdf",
-    "note": "Cite by page number. The acute primary angle closure section is the main source; the other sections act as distractors."
   }
 }
